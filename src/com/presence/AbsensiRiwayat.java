@@ -4,9 +4,26 @@
  */
 package com.presence;
 
+import com.presence.common.koneksi;
+import com.presence.common.userSession;
+import com.presence.entities.absensi;
+import com.presence.entities.departemen;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +37,7 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
     public AbsensiRiwayat() {
         initComponents();
         setOpaque(false);
+        fillDataTable(null);
     }
 
     /**
@@ -34,6 +52,12 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         lbTitle = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbAbsensi = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        dtpCari = new com.toedter.calendar.JDateChooser();
+        btnCari = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(244, 244, 244));
 
@@ -42,15 +66,79 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        tbAbsensi.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Tanggal Absensi", "Waktu Masuk", "Waktu Keluar"
+            }
+        ));
+        jScrollPane1.setViewportView(tbAbsensi);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Cari Tanggal :");
+
+        btnCari.setBackground(new java.awt.Color(51, 153, 255));
+        btnCari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCariMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCariMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCariMouseExited(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Cari");
+
+        javax.swing.GroupLayout btnCariLayout = new javax.swing.GroupLayout(btnCari);
+        btnCari.setLayout(btnCariLayout);
+        btnCariLayout.setHorizontalGroup(
+            btnCariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+        );
+        btnCariLayout.setVerticalGroup(
+            btnCariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(39, 39, 39)
+                        .addComponent(dtpCari, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(dtpCari, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -74,6 +162,78 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCariMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseEntered
+        // TODO add your handling code here:
+        btnCari.setBackground(new Color(45, 136, 227));
+    }//GEN-LAST:event_btnCariMouseEntered
+
+    private void btnCariMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseExited
+        // TODO add your handling code here:
+        btnCari.setBackground(new Color(51,153,255));
+    }//GEN-LAST:event_btnCariMouseExited
+
+    private void btnCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseClicked
+        // TODO add your handling code here:
+        Date filterDate = dtpCari.getDate();
+        if(filterDate != null){
+            fillDataTable(filterDate);
+        }else{
+            fillDataTable(null);
+        }
+    }//GEN-LAST:event_btnCariMouseClicked
+
+    private void fillDataTable(Date tanggal) {
+        ArrayList<absensi> data = getDataAbsensi(tanggal);
+        DefaultTableModel model = (DefaultTableModel) tbAbsensi.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[3];
+        for (int i = 0; i < data.size(); i++) {
+            SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat HHmm = new SimpleDateFormat("HH:mm");
+            
+            row[0] = ddMMyyyy.format(data.get(i).getTanggal());
+            row[1] = HHmm.format(Date.from(data.get(i).getWaktu_masuk().atZone(ZoneId.systemDefault()).toInstant()));
+            row[2] = HHmm.format(Date.from(data.get(i).getWaktu_keluar().atZone(ZoneId.systemDefault()).toInstant()));
+
+            model.addRow(row);
+        }
+    }    
+    
+    private ArrayList<absensi> getDataAbsensi(Date tanggal) {
+        ArrayList<absensi> data = new ArrayList();
+        try {
+            Connection conn = new koneksi().connect();
+
+            Statement st = conn.createStatement();
+            String sql = "select * from absensi where user_id="+userSession.getU_id();
+            if(tanggal != null){
+                SimpleDateFormat yyyyMMdd = new SimpleDateFormat("yyyy-MM-dd");
+                String str_tgl = yyyyMMdd.format(tanggal);
+                sql += " and tanggal = '" + str_tgl + "'";
+            }
+            sql += " order by tanggal desc";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                absensi abs = new absensi();
+                abs.setTanggal(rs.getDate("tanggal"));
+                abs.setWaktu_masuk(rs.getObject("waktu_masuk", LocalDateTime.class));
+                abs.setWaktu_keluar(rs.getObject("waktu_keluar", LocalDateTime.class));
+                data.add(abs);
+            }
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null,
+                        e.getMessage(),
+                        "Gagal",
+                        JOptionPane.ERROR_MESSAGE);
+                    
+        }
+        return data;
+    }    
+    
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -83,8 +243,14 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnCari;
+    private com.toedter.calendar.JDateChooser dtpCari;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbTitle;
+    private javax.swing.JTable tbAbsensi;
     // End of variables declaration//GEN-END:variables
 }

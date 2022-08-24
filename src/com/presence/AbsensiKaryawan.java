@@ -49,13 +49,15 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
         jPanel1.add(lbTanggal, "align center top,wrap");
         jPanel1.add(jPanel2, "align center top,gaptop 20,wrap");
 
-        //unremark this if app is ready to demo
-//        kelompok_absensi dataShift = getDataShift(userSession.getU_kelompokAbsen());
-//        SimpleDateFormat s = new SimpleDateFormat("HH:mm");
-//        String waktuMasuk = s.format(dataShift.getWaktu_masuk());
-//        String waktuKeluar = s.format(dataShift.getWaktu_keluar());
-//        lbShiftTime.setText(waktuMasuk + " s.d " + waktuKeluar);
-//        lbShiftName.setText(dataShift.getNama());
+        kelompok_absensi dataShift = getDataShift(userSession.getU_kelompokAbsen());
+        if (dataShift.getId() != 0) {
+            SimpleDateFormat s = new SimpleDateFormat("HH:mm");
+            String waktuMasuk = s.format(dataShift.getWaktu_masuk());
+            String waktuKeluar = s.format(dataShift.getWaktu_keluar());
+            lbShiftTime.setText(waktuMasuk + " s.d " + waktuKeluar);
+            lbShiftName.setText(dataShift.getNama());
+        }
+
         absensi dataAbsen = getDataAbsensi(userSession.getU_id());
         if (dataAbsen.getId() != 0) {
             if (dataAbsen.getWaktu_keluar() == null) {
