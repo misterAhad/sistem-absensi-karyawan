@@ -15,6 +15,8 @@ public class Clock extends javax.swing.JPanel {
         lbWaktu.setForeground(new Color(255,255,255));
         //set default color to white;
         
+        
+     //unremark this if app is ready to demo
 //        new Thread() {
 //            public void run() {
 //                while (timeRun == 0) {
