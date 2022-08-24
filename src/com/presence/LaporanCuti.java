@@ -35,8 +35,9 @@ public class LaporanCuti extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
 
+        lbTitle.setBackground(new java.awt.Color(244, 244, 244));
         lbTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        lbTitle.setText("Absensi Karyawan");
+        lbTitle.setText("Laporan Cuti");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
