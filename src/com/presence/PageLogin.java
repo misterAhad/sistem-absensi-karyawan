@@ -213,7 +213,11 @@ public class PageLogin extends javax.swing.JFrame {
             st.close();
             conn.close();
         } catch (SQLException e) {
-
+                    JOptionPane.showMessageDialog(null,
+                        e.getMessage(),
+                        "Gagal",
+                        JOptionPane.ERROR_MESSAGE);
+                    
         }
         return user;
     }

@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,11 +29,13 @@ public class PageManajer extends javax.swing.JFrame {
         menuPanel.addMenu("Halaman Utama", "ic_app_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke halaman utama
+               changePanel(welcomePanel2);
             }
         });
         menuPanel.addMenu("Persetujuan Cuti", "ic_pulse_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke CutiPersetujuan
+               changePanel(cutiPersetujuan1);
             }
         });
         menuPanel.addMenu("Laporan Cuti", "ic_paper_24", 0, new MouseAdapter() {
@@ -42,6 +45,16 @@ public class PageManajer extends javax.swing.JFrame {
         });        
     }
 
+    private void changePanel(JPanel panel){
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        mainPanel.add(panel);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }       
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +69,7 @@ public class PageManajer extends javax.swing.JFrame {
         headerPanel1 = new com.presence.component.Header();
         mainPanel = new javax.swing.JPanel();
         welcomePanel2 = new com.presence.WelcomePanel();
+        cutiPersetujuan1 = new com.presence.CutiPersetujuan();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Presence - Sistem Absensi Karyawan");
@@ -64,6 +78,7 @@ public class PageManajer extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(welcomePanel2, "card2");
+        mainPanel.add(cutiPersetujuan1, "card3");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -137,6 +152,7 @@ public class PageManajer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.presence.CutiPersetujuan cutiPersetujuan1;
     private com.presence.component.Header headerPanel1;
     private javax.swing.JPanel mainPanel;
     private com.presence.component.Menu menuPanel;

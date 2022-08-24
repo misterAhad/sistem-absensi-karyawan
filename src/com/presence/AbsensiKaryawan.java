@@ -56,7 +56,6 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
 //        String waktuKeluar = s.format(dataShift.getWaktu_keluar());
 //        lbShiftTime.setText(waktuMasuk + " s.d " + waktuKeluar);
 //        lbShiftName.setText(dataShift.getNama());
-
         absensi dataAbsen = getDataAbsensi(userSession.getU_id());
         if (dataAbsen.getId() != 0) {
             if (dataAbsen.getWaktu_keluar() == null) {
@@ -368,6 +367,10 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
             st.close();
             conn.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
         return dataAbsensi;
@@ -392,15 +395,18 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
             st.close();
             conn.close();
         } catch (SQLException e) {
-
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
         }
         return dataShift;
     }
 
-    private void checkInAbsen(){
+    private void checkInAbsen() {
         long timeNow = Calendar.getInstance().getTimeInMillis();
         java.sql.Timestamp ts = new java.sql.Timestamp(timeNow);
-         try {
+        try {
             Connection conn = new koneksi().connect();
 
             Statement st = conn.createStatement();
@@ -409,20 +415,24 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
             preparedStatement.setInt(1, userSession.getU_id());
             preparedStatement.setTimestamp(2, ts);
             preparedStatement.setDate(3, java.sql.Date.valueOf(java.time.LocalDate.now()));
-            
+
             preparedStatement.executeUpdate();
 
             st.close();
             conn.close();
         } catch (SQLException e) {
-
-        }       
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
-    
-    private void checkOutAbsen(){
+
+    private void checkOutAbsen() {
         long timeNow = Calendar.getInstance().getTimeInMillis();
         java.sql.Timestamp ts = new java.sql.Timestamp(timeNow);
-         try {
+        try {
             Connection conn = new koneksi().connect();
 
             Statement st = conn.createStatement();
@@ -430,15 +440,20 @@ public class AbsensiKaryawan extends javax.swing.JPanel {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setTimestamp(1, ts);
             preparedStatement.setInt(2, userSession.getU_id());
-            
+
             preparedStatement.executeUpdate();
 
             st.close();
             conn.close();
         } catch (SQLException e) {
-
-        }              
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;

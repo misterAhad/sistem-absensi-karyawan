@@ -71,6 +71,7 @@ public class PageHRD extends javax.swing.JFrame {
         headerPanel1 = new com.presence.component.Header();
         mainPanel = new javax.swing.JPanel();
         welcomePanel2 = new com.presence.WelcomePanel();
+        laporanAbsensi1 = new com.presence.LaporanAbsensi();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Presence - Sistem Absensi Karyawan");
@@ -79,6 +80,7 @@ public class PageHRD extends javax.swing.JFrame {
 
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(welcomePanel2, "card2");
+        mainPanel.add(laporanAbsensi1, "card3");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -153,6 +155,7 @@ public class PageHRD extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.presence.component.Header headerPanel1;
+    private com.presence.LaporanAbsensi laporanAbsensi1;
     private javax.swing.JPanel mainPanel;
     private com.presence.component.Menu menuPanel;
     private com.presence.component.PanelBorder panelBorder1;
