@@ -4,10 +4,15 @@
  */
 package com.presence;
 
+import com.presence.common.koneksi;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -46,6 +51,9 @@ public class LaporanDepartemen extends javax.swing.JPanel {
 
         btnCetak.setBackground(new java.awt.Color(51, 153, 255));
         btnCetak.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCetakMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCetakMouseEntered(evt);
             }
@@ -117,6 +125,21 @@ public class LaporanDepartemen extends javax.swing.JPanel {
         // TODO add your handling code here:
         btnCetak.setBackground(new Color(51, 153, 255));
     }//GEN-LAST:event_btnCetakMouseExited
+
+    private void btnCetakMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCetakMouseClicked
+        // TODO add your handling code here:
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(getClass().getResourceAsStream("/com/presence/reports/report_departemen.jasper"),
+                    null, koneksi.koneksi());
+            JasperViewer.viewReport(jp);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    ex.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnCetakMouseClicked
 
     @Override
     protected void paintComponent(Graphics grphcs) {

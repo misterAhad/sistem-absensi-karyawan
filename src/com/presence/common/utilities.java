@@ -14,75 +14,125 @@ import java.util.List;
  */
 public class utilities {
     public static String getDayName(int day_of_week) {
-        switch(day_of_week){
-            case 1 -> {
+        //use this if your JDK is 14 or higher
+//        switch(day_of_week){
+//            case 1 -> {
+//                return "Minggu";
+//            }
+//            case 2 -> {
+//                return "Senin";
+//            }
+//            case 3 -> {
+//                return "Selasa";
+//            }
+//            case 4 -> {
+//                return "Rabu";
+//            }
+//            case 5 -> {
+//                return "Kamis";
+//            }
+//            case 6 -> {
+//                return "Jumat";
+//            }
+//            case 7 -> {
+//                return "Sabtu";
+//            }
+//            default -> {                
+//                return "";
+//            }            
+//        }
+
+        //use this if your JDK is below 14
+        switch (day_of_week) {
+            case 1:
                 return "Minggu";
-            }
-            case 2 -> {
+            case 2:
                 return "Senin";
-            }
-            case 3 -> {
+            case 3:
                 return "Selasa";
-            }
-            case 4 -> {
+            case 4:
                 return "Rabu";
-            }
-            case 5 -> {
+            case 5:
                 return "Kamis";
-            }
-            case 6 -> {
+            case 6:
                 return "Jumat";
-            }
-            case 7 -> {
+            case 7:
                 return "Sabtu";
-            }
-            default -> {                
+            default:
                 return "";
-            }            
-        }
+            }
     } 
     public static String getMonthName(int month){
-         switch(month){
-            case 1 -> {
+//         switch(month){
+//            case 1 -> {
+//                return "Januari";
+//            }
+//            case 2 -> {
+//                return "Februari";
+//            }
+//            case 3 -> {
+//                return "Maret";
+//            }
+//            case 4 -> {
+//                return "April";
+//            }
+//            case 5 -> {
+//                return "Mei";
+//            }
+//            case 6 -> {
+//                return "Juni";
+//            }
+//            case 7 -> {
+//                return "Juli";
+//            }
+//            case 8 -> {
+//                return "Agustus";
+//            }
+//            case 9 -> {
+//                return "September";
+//            }
+//            case 10 -> {
+//                return "Oktober";
+//            }
+//            case 11 -> {
+//                return "November";
+//            }
+//            case 12 -> {
+//                return "Desember";
+//            }            
+//            default -> {                
+//                return "";
+//            }            
+//        }      
+
+        switch (month) {
+            case 1:
                 return "Januari";
-            }
-            case 2 -> {
+            case 2:
                 return "Februari";
-            }
-            case 3 -> {
+            case 3:
                 return "Maret";
-            }
-            case 4 -> {
+            case 4:
                 return "April";
-            }
-            case 5 -> {
+            case 5:
                 return "Mei";
-            }
-            case 6 -> {
+            case 6:
                 return "Juni";
-            }
-            case 7 -> {
+            case 7:
                 return "Juli";
-            }
-            case 8 -> {
+            case 8:
                 return "Agustus";
-            }
-            case 9 -> {
+            case 9:
                 return "September";
-            }
-            case 10 -> {
+            case 10:
                 return "Oktober";
-            }
-            case 11 -> {
-                return "November";
-            }
-            case 12 -> {
-                return "Desember";
-            }            
-            default -> {                
+            case 11:
+                return "November";      
+            case 12:
+                return "Desember";                    
+            default:
                 return "";
-            }            
-        }       
+            }
     }
     
     public static Window getVisibleWindow(){
