@@ -43,11 +43,14 @@ public class LaporanDepartemen extends javax.swing.JPanel {
         btnCetak = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(244, 244, 244));
+
         lbTitle.setBackground(new java.awt.Color(244, 244, 244));
         lbTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lbTitle.setText("Laporan Departemen");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         btnCetak.setBackground(new java.awt.Color(51, 153, 255));
         btnCetak.addMouseListener(new java.awt.event.MouseAdapter() {
