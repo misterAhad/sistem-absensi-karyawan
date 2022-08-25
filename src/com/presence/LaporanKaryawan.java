@@ -4,7 +4,12 @@
  */
 package com.presence;
 
+import com.presence.common.koneksi;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -55,6 +60,11 @@ public class LaporanKaryawan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cetak Laporan Karyawan");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnCetakLayout = new javax.swing.GroupLayout(btnCetak);
         btnCetak.setLayout(btnCetakLayout);
@@ -114,6 +124,17 @@ public class LaporanKaryawan extends javax.swing.JPanel {
         // TODO add your handling code here:
         btnCetak.setBackground(new Color(51, 153, 255));
     }//GEN-LAST:event_btnCetakMouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(getClass().getResourceAsStream("reports/report_karyawan.jasper"), null, new koneksi().connect());
+            JasperViewer.viewReport(jp);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(LaporanKaryawan.this, e.getMessage());
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

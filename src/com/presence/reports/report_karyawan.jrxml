@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_karyawan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b6a74291-effb-4503-a735-12e1cdd08cbd">
+	<property name="ireport.zoom" value="2.1435888100000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select users.nama_lengkap, users.email, DATE_FORMAT(users.tanggal_lahir, '%Y %M %d') tanggal_lahir,  DATE_FORMAT(users.tanggal_bergabung, '%Y %M %d') tanggal_bergabung, jabatan.nama_jabatan, users.nip
+, case when users.aktif = true then 'Aktif' else 'Tidak Aktif' end as aktif_formatted from users
+inner join jabatan on jabatan.id = users.jabatan_id;]]>
+	</queryString>
+	<field name="nama_lengkap" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal_lahir" class="java.lang.String"/>
+	<field name="tanggal_bergabung" class="java.lang.String"/>
+	<field name="nama_jabatan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="aktif_formatted" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="10" width="153" height="20" uuid="adc6447b-2e09-4a57-8c3b-42bb23731bfa"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORT KARYAWAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="9" width="100" height="20" uuid="2a7eb150-1086-4653-9bd7-abb78805020f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Karyawan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="9" width="81" height="20" uuid="dda364b5-fbe6-43bf-8a8a-726974fab314"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Lahir]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="9" width="76" height="20" uuid="92f3f421-fc3c-490e-91d4-a4499ca0e557"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Bergabung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="9" width="51" height="20" uuid="37e559be-34de-46c5-8889-fc1754ed0c97"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jabatan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="9" width="61" height="20" uuid="2deaa8ba-0fcf-4c61-8d95-310637c0e33d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aktif]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="29" width="555" height="1" uuid="79a32f03-3fc9-42f2-9254-7c96a2187319"/>
+			</line>
+			<staticText>
+				<reportElement x="4" y="9" width="52" height="20" uuid="34e4c049-70ca-475f-a299-41333ff7a5a9"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="9" width="94" height="20" uuid="f85f5945-417b-49fa-9a26-66b24d950c14"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="3" width="100" height="20" uuid="a2f395c4-3f1b-4fb9-a18a-3a2a120011b0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="4" width="81" height="19" uuid="1420a194-0115-492e-b505-c4ebd81ee22d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_lahir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="3" width="76" height="20" uuid="c4aa6b9a-385a-46e4-bf5d-cc256f247bf1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_bergabung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="4" width="51" height="19" uuid="0b50262e-7cfb-4425-b1bf-461897d7b8f5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_jabatan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="3" width="61" height="20" uuid="7ea65150-8663-4157-82fd-6dd99e19cfd7"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{aktif_formatted}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="3" width="52" height="20" uuid="796aeb75-ff80-4351-a184-778daba8019a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nip}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="4" y="23" width="551" height="1" forecolor="#999999" uuid="d3acc2c7-7ef1-4675-a88c-732a9aa686c6"/>
+			</line>
+			<textField>
+				<reportElement x="165" y="4" width="94" height="20" uuid="2b36a55a-6398-4a65-a9e2-216cc7f22daf"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="34" width="100" height="20" uuid="aa186001-7792-415f-8b32-0dc3007b3e5e"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10592726-49ab-4488-b568-121979ee0a3d">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select u.nip, u.nama_lengkap,
+       DATE_FORMAT(c.tanggal_mulai, '%M %Y') as 'group',
+       DATE_FORMAT(c.tanggal_mulai, '%d') as tanggal_mulai,
+       DATE_FORMAT(c.tanggal_berakhir, '%d') as tanggal_berakhir,
+       DATE_FORMAT(c.tanggal_disetujui, '%d %m') as tanggal_disetujui,
+       (select count(c2.id) from cuti c2 where c2.user_id = u.id and year(c2.tanggal_mulai) = year(now())) as cuti_tahun_ini,
+       u1.nama_lengkap penyetuju
+from users u
+inner join cuti c on u.id = c.user_id
+inner join users u1 on u1.id = c.penyetuju_id;]]>
+	</queryString>
+	<field name="nip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_lengkap" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="group" class="java.lang.String"/>
+	<field name="tanggal_mulai" class="java.lang.String"/>
+	<field name="tanggal_berakhir" class="java.lang.String"/>
+	<field name="tanggal_disetujui" class="java.lang.String"/>
+	<field name="cuti_tahun_ini" class="java.lang.Long"/>
+	<field name="penyetuju" class="java.lang.String"/>
+	<group name="group">
+		<groupExpression><![CDATA[$F{group}]]></groupExpression>
+		<groupHeader>
+			<band height="28">
+				<textField>
+					<reportElement x="0" y="4" width="100" height="20" uuid="8e83f8c5-ad2a-43b5-b0aa-fc36bc403ba3"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{group}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="227" y="15" width="100" height="20" uuid="b8633add-c2e8-4d0d-a9cc-9dc759758bf9"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORT CUTI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="18" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="72" height="31" uuid="a66da9bb-bf82-477a-acc7-d67147635db2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIP]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="35" width="555" height="1" uuid="0927cbcc-c407-42f9-8844-ec570f3a984b"/>
+			</line>
+			<staticText>
+				<reportElement x="75" y="0" width="100" height="31" uuid="ac6238b7-2a05-40e0-8c2b-1ee81fdaf443"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="0" width="49" height="31" uuid="ef18938e-95a2-4121-83ba-3f2f6892e545"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Mulai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="0" width="46" height="31" uuid="f66695cf-4ea0-4e56-a10e-a2c0e7bdd5d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Berakhir]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="0" width="50" height="31" uuid="44c48c73-cd70-4932-a889-893b938d183b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Disetujui]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="0" width="60" height="31" uuid="dde3e880-c434-4107-8a46-923964bf2abe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuti Digunakan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="402" y="0" width="100" height="31" uuid="75cb02e1-5a2b-4633-bc46-32d1a989d68d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Disetujui Oleh]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="72" height="20" uuid="2785edf6-794c-4b04-ab2a-eca3e84d337d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="0" width="100" height="20" uuid="42840d73-1944-42b7-9720-ac90cb19607a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="0" width="49" height="20" uuid="f4a1b922-569d-4dec-a593-39986162017d"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_mulai}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="0" width="46" height="20" uuid="222e04b7-b29f-4dc2-bc23-b24d70782f2a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_berakhir}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="49" height="20" uuid="1f200d5b-d0de-4e0b-93a3-28279c335e7e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_disetujui}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="60" height="20" uuid="761ac250-be4c-4dce-86d0-a36e30e2594a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuti_tahun_ini}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="402" y="0" width="100" height="20" uuid="0c9ad9f1-36da-41a2-985b-61dab98649f4"/>
+				<textFieldExpression><![CDATA[$F{penyetuju}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="379753eb-a483-4bf1-a9f3-4163e84326cf"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch"/>
+	</summary>
+</jasperReport>
