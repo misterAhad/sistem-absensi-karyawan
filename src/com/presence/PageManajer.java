@@ -41,6 +41,7 @@ public class PageManajer extends javax.swing.JFrame {
         menuPanel.addMenu("Laporan Cuti", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanCuti
+               changePanel(laporanCuti1);
             }
         });        
     }
@@ -70,6 +71,7 @@ public class PageManajer extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         welcomePanel2 = new com.presence.WelcomePanel();
         cutiPersetujuan1 = new com.presence.CutiPersetujuan();
+        laporanCuti1 = new com.presence.LaporanCuti();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Presence - Sistem Absensi Karyawan");
@@ -79,6 +81,7 @@ public class PageManajer extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(welcomePanel2, "card2");
         mainPanel.add(cutiPersetujuan1, "card3");
+        mainPanel.add(laporanCuti1, "card4");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -154,6 +157,7 @@ public class PageManajer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.presence.CutiPersetujuan cutiPersetujuan1;
     private com.presence.component.Header headerPanel1;
+    private com.presence.LaporanCuti laporanCuti1;
     private javax.swing.JPanel mainPanel;
     private com.presence.component.Menu menuPanel;
     private com.presence.component.PanelBorder panelBorder1;

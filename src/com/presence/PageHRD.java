@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,34 +29,50 @@ public class PageHRD extends javax.swing.JFrame {
         menuPanel.addMenu("Halaman Utama", "ic_app_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke WelcomePanel
+               changePanel(welcomePanel2);
             }
         });
         menuPanel.addMenu("Laporan Karyawan", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanKaryawan
+               changePanel(laporanKaryawan1);
             }
         });
         menuPanel.addMenu("Laporan Departemen", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanDepartemen
+               changePanel(laporanDepartemen1);
             }
         });
         menuPanel.addMenu("Laporan Jabatan", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanJabatan
+               changePanel(laporanJabatan1);
             }
         });
         menuPanel.addMenu("Laporan Absensi", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanAbsensi
+               changePanel(laporanAbsensi1);
             }
         });  
         menuPanel.addMenu("Laporan Cuti", "ic_paper_24", 0, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke LaporanCuti
+               changePanel(laporanCuti1);
             }
         });    
     }
+    
+    private void changePanel(JPanel panel){
+        mainPanel.removeAll();
+        mainPanel.repaint();
+        mainPanel.revalidate();
+        
+        mainPanel.add(panel);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }           
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,6 +89,10 @@ public class PageHRD extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         welcomePanel2 = new com.presence.WelcomePanel();
         laporanAbsensi1 = new com.presence.LaporanAbsensi();
+        laporanCuti1 = new com.presence.LaporanCuti();
+        laporanDepartemen1 = new com.presence.LaporanDepartemen();
+        laporanJabatan1 = new com.presence.LaporanJabatan();
+        laporanKaryawan1 = new com.presence.LaporanKaryawan();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Presence - Sistem Absensi Karyawan");
@@ -81,6 +102,10 @@ public class PageHRD extends javax.swing.JFrame {
         mainPanel.setLayout(new java.awt.CardLayout());
         mainPanel.add(welcomePanel2, "card2");
         mainPanel.add(laporanAbsensi1, "card3");
+        mainPanel.add(laporanCuti1, "card4");
+        mainPanel.add(laporanDepartemen1, "card5");
+        mainPanel.add(laporanJabatan1, "card6");
+        mainPanel.add(laporanKaryawan1, "card7");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -156,6 +181,10 @@ public class PageHRD extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.presence.component.Header headerPanel1;
     private com.presence.LaporanAbsensi laporanAbsensi1;
+    private com.presence.LaporanCuti laporanCuti1;
+    private com.presence.LaporanDepartemen laporanDepartemen1;
+    private com.presence.LaporanJabatan laporanJabatan1;
+    private com.presence.LaporanKaryawan laporanKaryawan1;
     private javax.swing.JPanel mainPanel;
     private com.presence.component.Menu menuPanel;
     private com.presence.component.PanelBorder panelBorder1;
