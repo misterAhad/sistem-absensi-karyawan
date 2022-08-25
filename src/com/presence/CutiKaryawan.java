@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -219,18 +220,22 @@ public class CutiKaryawan extends javax.swing.JPanel {
         Date tglMulai = dtTglMulai.getDate();
         Date tglSelesai = dtTglSelesai.getDate();
         String alasan = arAlasan.getText();
+        
+        long timeNow = Calendar.getInstance().getTimeInMillis();
+        java.sql.Timestamp ts = new java.sql.Timestamp(timeNow); 
 
         try {
             Connection conn = new koneksi().connect();
 
             Statement st = conn.createStatement();
-            String sql = "INSERT INTO cuti(tanggal_mulai,tanggal_berakhir,alasan,status,user_id) "
-                    + "VALUES (?,?,?,2,?)";
+            String sql = "INSERT INTO cuti(tanggal_mulai,tanggal_berakhir,alasan,tanggal_pengajuan,status,user_id) "
+                    + "VALUES (?,?,?,?,2,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setDate(1, new java.sql.Date(tglMulai.getTime()));
             preparedStatement.setDate(2, new java.sql.Date(tglSelesai.getTime()));
             preparedStatement.setString(3, alasan);
-            preparedStatement.setInt(4, userSession.getU_id());
+            preparedStatement.setTimestamp(4, ts);
+            preparedStatement.setInt(5, userSession.getU_id());
             preparedStatement.executeUpdate();
 
             st.close();

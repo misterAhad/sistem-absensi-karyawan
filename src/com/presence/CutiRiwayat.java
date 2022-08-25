@@ -4,9 +4,24 @@
  */
 package com.presence;
 
+import com.presence.common.koneksi;
+import com.presence.common.userSession;
+import com.presence.entities.absensi;
+import com.presence.entities.cuti;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +35,12 @@ public class CutiRiwayat extends javax.swing.JPanel {
     public CutiRiwayat() {
         initComponents();
         setOpaque(false);
+        fillDataTable("Semua status");
     }
 
+    public void refreshData(){
+        fillDataTable("Semua status");        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,6 +53,12 @@ public class CutiRiwayat extends javax.swing.JPanel {
         lbTitle = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbCuti = new javax.swing.JTable();
+        btnCari = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        cbStatus = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(244, 244, 244));
 
@@ -42,15 +67,84 @@ public class CutiRiwayat extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        tbCuti.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tanggal Pengajuan", "Tanggal Mulai Cuti", "Tanggal Selesai Cuti", "Status", "Tanggal Persetujuan", "Manajer/Atasan"
+            }
+        ));
+        jScrollPane1.setViewportView(tbCuti);
+
+        btnCari.setBackground(new java.awt.Color(51, 153, 255));
+        btnCari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCariMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCariMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCariMouseExited(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Cari");
+
+        javax.swing.GroupLayout btnCariLayout = new javax.swing.GroupLayout(btnCari);
+        btnCari.setLayout(btnCariLayout);
+        btnCariLayout.setHorizontalGroup(
+            btnCariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+        );
+        btnCariLayout.setVerticalGroup(
+            btnCariLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+        );
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Status");
+
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Semua status", "Disetujui", "Menunggu persetujuan", "Ditolak" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 448, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbStatus)
+                        .addComponent(jLabel3))
+                    .addComponent(btnCari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -74,6 +168,89 @@ public class CutiRiwayat extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseClicked
+        // TODO add your handling code here:
+        String sts = cbStatus.getSelectedItem().toString();
+        fillDataTable(sts);
+    }//GEN-LAST:event_btnCariMouseClicked
+
+    private void btnCariMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseEntered
+        // TODO add your handling code here:
+        btnCari.setBackground(new Color(45, 136, 227));
+    }//GEN-LAST:event_btnCariMouseEntered
+
+    private void btnCariMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCariMouseExited
+        // TODO add your handling code here:
+        btnCari.setBackground(new Color(51, 153, 255));
+    }//GEN-LAST:event_btnCariMouseExited
+
+    private void fillDataTable(String status) {
+        ArrayList<cuti> data = getDataCuti(status);
+        DefaultTableModel model = (DefaultTableModel) tbCuti.getModel();
+        model.setRowCount(0);
+        Object[] row = new Object[6];
+        for (int i = 0; i < data.size(); i++) {
+            SimpleDateFormat ddMMyyyy = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat HHmm = new SimpleDateFormat("HH:mm");
+
+            row[0] = ddMMyyyy.format(data.get(i).getTanggal_pengajuan());
+            row[1] = ddMMyyyy.format(data.get(i).getTanggal_mulai());
+            row[2] = ddMMyyyy.format(data.get(i).getTanggal_berakhir()); 
+            row[3] = data.get(i).getStatus_str();
+            if(data.get(i).getTanggal_disetujui() == null){
+            row[4] = "-";                
+            }else{
+                row[4] = ddMMyyyy.format(data.get(i).getTanggal_disetujui());
+            }
+            row[5] = data.get(i).getPenyetuju();
+            model.addRow(row);
+        }
+    }
+
+    private ArrayList<cuti> getDataCuti(String status) {
+        ArrayList<cuti> data = new ArrayList();
+        try {
+            Connection conn = new koneksi().connect();
+
+            Statement st = conn.createStatement();
+            String sql = "SELECT tanggal_pengajuan, tanggal_mulai, tanggal_berakhir, "
+                    + "CASE WHEN status = 1 THEN 'Disetujui' WHEN status = 2 THEN 'Menunggu Persetujuan' WHEN status = 0 THEN 'Ditolak' END as status , "
+                    + "tanggal_disetujui, "
+                    + "u.nama_lengkap as penyetuju FROM cuti c left join users u on c.penyetuju_id = u.id where user_id =" + userSession.getU_id();
+            if (status != "Semua status") {
+                int sts = 0;
+                if(status == "Disetujui"){
+                    sts = 1;
+                }else if (status == "Menunggu persetujuan"){
+                    sts = 2;
+                }
+                sql += " and status = " + sts + "";
+            }
+            sql += " order by tanggal_pengajuan desc";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                cuti ct = new cuti();
+                ct.setTanggal_pengajuan(rs.getDate("tanggal_pengajuan"));
+                ct.setTanggal_mulai(rs.getDate("tanggal_mulai"));
+                ct.setTanggal_berakhir(rs.getDate("tanggal_berakhir"));
+                ct.setStatus_str(rs.getString("status"));
+                ct.setTanggal_disetujui(rs.getDate("tanggal_disetujui"));
+                ct.setPenyetuju(rs.getString("penyetuju"));
+                data.add(ct);
+            }
+            st.close();
+            conn.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,
+                    e.getMessage(),
+                    "Gagal",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        return data;
+    }
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -83,8 +260,14 @@ public class CutiRiwayat extends javax.swing.JPanel {
         super.paintComponent(grphcs);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnCari;
+    private javax.swing.JComboBox<String> cbStatus;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbTitle;
+    private javax.swing.JTable tbCuti;
     // End of variables declaration//GEN-END:variables
 }

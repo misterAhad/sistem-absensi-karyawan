@@ -39,7 +39,10 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         setOpaque(false);
         fillDataTable(null);
     }
-
+    
+    public void refreshData(){
+        fillDataTable(null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,7 +83,7 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbAbsensi);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Cari Tanggal :");
+        jLabel1.setText("Cari Tanggal ");
 
         btnCari.setBackground(new java.awt.Color(51, 153, 255));
         btnCari.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -117,16 +120,18 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
                         .addComponent(jLabel1)
                         .addGap(39, 39, 39)
                         .addComponent(dtpCari, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(btnCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,8 +142,8 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -193,8 +198,11 @@ public class AbsensiRiwayat extends javax.swing.JPanel {
             
             row[0] = ddMMyyyy.format(data.get(i).getTanggal());
             row[1] = HHmm.format(Date.from(data.get(i).getWaktu_masuk().atZone(ZoneId.systemDefault()).toInstant()));
-            row[2] = HHmm.format(Date.from(data.get(i).getWaktu_keluar().atZone(ZoneId.systemDefault()).toInstant()));
-
+            if(data.get(i).getWaktu_keluar() == null){
+                row[2] = "-";
+            }else{
+            row[2] = HHmm.format(Date.from(data.get(i).getWaktu_keluar().atZone(ZoneId.systemDefault()).toInstant()));                
+            }
             model.addRow(row);
         }
     }    

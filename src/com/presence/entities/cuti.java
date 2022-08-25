@@ -16,10 +16,38 @@ public class cuti {
     private Date tanggal_berakhir;
     private String alasan;
     private int status;
+    private Date tanggal_pengajuan;
     private Date tanggal_disetujui;
     private int user_id;
     private int penyetuju_id;
+    
+    private String status_str;
+    private String penyetuju;
 
+    public String getStatus_str() {
+        return status_str;
+    }
+
+    public void setStatus_str(String status_str) {
+        this.status_str = status_str;
+    }
+
+    public String getPenyetuju() {
+        return penyetuju;
+    }
+
+    public void setPenyetuju(String penyetuju) {
+        this.penyetuju = penyetuju;
+    }
+
+    public Date getTanggal_pengajuan() {
+        return tanggal_pengajuan;
+    }
+
+    public void setTanggal_pengajuan(Date tanggal_pengajuan) {
+        this.tanggal_pengajuan = tanggal_pengajuan;
+    }
+    
     public int getId() {
         return id;
     }
