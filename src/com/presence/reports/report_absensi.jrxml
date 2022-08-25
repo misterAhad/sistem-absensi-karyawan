@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cbfbda07-77c1-4e72-9bec-68911411a1f1">
+	<property name="ireport.zoom" value="2.5937424601000023"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select u.nip, u.nama_lengkap,
+       DATE_FORMAT(a.tanggal, '%M %Y') as 'group',
+       DATE_FORMAT(a.waktu_masuk, '%H:%i:%S') as waktu_masuk,
+       case when a.waktu_keluar != null then DATE_FORMAT(a.waktu_keluar, '%H:%i:%S') else '-' end as waktu_keluar ,
+       case when time(a.waktu_masuk) > ka.waktu_masuk then 'Terlambat' when time(a.waktu_keluar) < ka.waktu_keluar then 'Pulang Cepat' else 'Tepat Waktu' end as keterangan
+from users u
+inner join absensi a on u.id = a.user_id
+inner join kelompok_absensi ka on u.kelompok_absensi_id = ka.id;]]>
+	</queryString>
+	<field name="nip" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_lengkap" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="group" class="java.lang.String"/>
+	<field name="waktu_masuk" class="java.lang.String"/>
+	<field name="waktu_keluar" class="java.lang.String"/>
+	<field name="keterangan" class="java.lang.String"/>
+	<group name="group">
+		<groupExpression><![CDATA[$F{group}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="3" y="0" width="100" height="20" uuid="e1243886-df67-4fd2-b7c2-c7a27e1791b7"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{group}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="213" y="17" width="128" height="20" uuid="f67dc1fd-904e-4b5f-9cd3-54f9f242d1ae"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORT ABSENSI]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="3" y="2" width="73" height="20" uuid="b67b05c1-d817-44d6-aaf3-96e2b66d1dbc"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NIP]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="28" width="555" height="1" uuid="643e606e-2e84-420c-b747-64d9e95224c1"/>
+			</line>
+			<staticText>
+				<reportElement x="89" y="2" width="100" height="20" uuid="e5822ffa-9e47-4866-acfd-d496b6cc733b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="3" width="100" height="20" uuid="1b835f49-0a1f-46cd-ad44-f75da2125e01"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Masuk]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="3" width="100" height="20" uuid="72dd38f5-7b03-491a-a91f-40d84e0ee5ec"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" uuid="48056311-f453-4126-a9c8-9dd8b8025aec"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Keterangan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="10" width="73" height="20" uuid="eedecb52-bc04-4eb1-973a-7d7723316972"/>
+				<textFieldExpression><![CDATA[$F{nip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="10" width="124" height="20" uuid="e11c74b3-5d52-48fa-8cf7-b4956306792e"/>
+				<textFieldExpression><![CDATA[$F{nama_lengkap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="10" width="100" height="20" uuid="05e91a97-983f-45e2-a08d-1a1a8ae7999c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{waktu_masuk}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="10" width="100" height="20" uuid="ab7807c7-abaf-472b-9353-732abf7ba968"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{waktu_keluar}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="10" width="100" height="20" uuid="1ac45ca3-564e-4e74-8967-facd775ed6c0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="38" width="555" height="1" uuid="54d6f366-3ac7-43ff-8e82-63327e91c17f"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

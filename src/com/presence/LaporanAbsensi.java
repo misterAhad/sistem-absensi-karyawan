@@ -4,10 +4,15 @@
  */
 package com.presence;
 
+import com.presence.common.koneksi;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -59,6 +64,11 @@ public class LaporanAbsensi extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cetak Laporan Absensi");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnCetakLayout = new javax.swing.GroupLayout(btnCetak);
         btnCetak.setLayout(btnCetakLayout);
@@ -118,6 +128,16 @@ public class LaporanAbsensi extends javax.swing.JPanel {
         // TODO add your handling code here:
         btnCetak.setBackground(new Color(51, 153, 255));
     }//GEN-LAST:event_btnCetakMouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        try {
+            JasperPrint jp = JasperFillManager.fillReport(getClass().getResourceAsStream("reports/report_absensi.jasper"), null, new koneksi().connect());
+            JasperViewer.viewReport(jp);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(LaporanAbsensi.this, e.getMessage());
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
 
     @Override
     protected void paintComponent(Graphics grphcs) {
