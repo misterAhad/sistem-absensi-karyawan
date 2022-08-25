@@ -59,14 +59,31 @@ public class userSession {
     public static String getU_jabatanName(int j_id) {
         String jabatan_name = "";
         
-        switch(j_id){
-            case 1 -> jabatan_name = "Admin";
-            case 2 -> jabatan_name = "HRD";
-            case 3 -> jabatan_name = "Manager";
-            case 4 -> jabatan_name = "Karyawan";
-            default -> {
-            }            
-        }
+//        switch(j_id){
+//            case 1 -> jabatan_name = "Admin";
+//            case 2 -> jabatan_name = "HRD";
+//            case 3 -> jabatan_name = "Manager";
+//            case 4 -> jabatan_name = "Karyawan";
+//            default -> {
+//            }            
+//        }
+
+          switch(j_id){
+              case 1:
+                  jabatan_name = "Admin";
+                  break;
+              case 2:
+                  jabatan_name = "HRD";
+                  break;
+              case 3:
+                  jabatan_name = "Manager";
+                  break;
+              case 4:
+                  jabatan_name = "Karyawan";
+                  break;
+              default:
+                  break;                  
+          }
         return jabatan_name;
     }    
 }
