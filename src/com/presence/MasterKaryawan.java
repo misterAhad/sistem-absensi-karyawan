@@ -55,6 +55,13 @@ public class MasterKaryawan extends javax.swing.JPanel {
         txtEmail.setBorder(textfield_border);
     }
 
+    public void refreshData(){
+        cbJabatan.removeAllItems();
+        cbShift.removeAllItems();        
+        getDataJabatan();
+        getDataShift();
+        fillDataTable();        
+    }         
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -6,6 +6,9 @@ package com.presence;
 
 import com.presence.common.koneksi;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -40,6 +43,8 @@ public class LaporanKaryawan extends javax.swing.JPanel {
         btnCetak = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(244, 244, 244));
+
         lbTitle.setBackground(new java.awt.Color(244, 244, 244));
         lbTitle.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         lbTitle.setText("Laporan Karyawan");
@@ -47,6 +52,7 @@ public class LaporanKaryawan extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCetak.setBackground(new java.awt.Color(51, 153, 255));
+        btnCetak.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCetak.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnCetakMouseEntered(evt);
@@ -136,7 +142,15 @@ public class LaporanKaryawan extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLabel1MouseClicked
 
-
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(getBackground());
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(grphcs);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnCetak;
     private javax.swing.JLabel jLabel1;

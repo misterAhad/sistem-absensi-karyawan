@@ -31,18 +31,21 @@ public class PageAdmin extends javax.swing.JFrame {
         menuPanel.addMenu("Data Departemen", "ic_building_24", 1, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke MasterDepartemen
+               masterDepartemen1.refreshData();
                changePanel(masterDepartemen1);
             }
         }); 
         menuPanel.addMenu("Data Jabatan", "ic_role_24", 2, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke MasterJabatan
+               masterJabatan2.refreshData();
                changePanel(masterJabatan2);
             }
         });
         menuPanel.addMenu("Data Karyawan", "ic_person_r_24", 3, new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                //todo : code untuk pindah ke MasterKaryawan
+               masterKaryawan2.refreshData();
                changePanel(masterKaryawan2);
             }
         });  

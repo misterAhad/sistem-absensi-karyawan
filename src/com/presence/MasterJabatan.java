@@ -47,6 +47,12 @@ public class MasterJabatan extends javax.swing.JPanel {
 
         txtNamaJabatan.setBorder(textfield_border);      
     }
+    
+    public void refreshData(){
+        cbNamaDept.removeAllItems();
+        getDataDept();
+        fillDataTable();        
+    }       
 
     /**
      * This method is called from within the constructor to initialize the form.
