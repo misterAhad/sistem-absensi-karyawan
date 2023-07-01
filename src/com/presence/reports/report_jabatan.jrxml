@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="df41f04a-c3fe-44b8-89b2-f778d1580fb8">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="df41f04a-c3fe-44b8-89b2-f778d1580fb8">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="266"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="25"/>
+	<property name="ireport.y" value="169"/>
 	<queryString language="SQL">
 		<![CDATA[select nama_jabatan, 
 CASE role_level WHEN 1 THEN 'Admin' WHEN 2 THEN 'HRD' WHEN 3 THEN 'Manajer' ELSE 'Karyawan' end as role_level, d.nama_dept
@@ -19,80 +19,132 @@ CASE role_level WHEN 1 THEN 'Admin' WHEN 2 THEN 'HRD' WHEN 3 THEN 'Manajer' ELSE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="103" splitType="Stretch">
 			<staticText>
-				<reportElement x="99" y="51" width="372" height="28" uuid="55204147-cfee-4761-b7bc-857adbcbff92"/>
+				<reportElement x="160" y="77" width="229" height="20" uuid="a5e1ba9b-b86b-47f4-ac13-ebfd9f5291cd"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[(+62) 21 7202630]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="135" y="40" width="280" height="30" uuid="4018118e-fd70-46a1-b7a3-fad609ad5a01"/>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PT ADW CONSULTING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="62" width="229" height="20" uuid="9798150f-e890-4051-a789-a774cb5c1a33"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[District 8, Treasury Tower, DKI Jakarta]]></text>
+			</staticText>
+			<image>
+				<reportElement x="18" y="31" width="66" height="66" uuid="9fd4e505-7c9d-464e-aaef-97d062204fd9"/>
+				<imageExpression><![CDATA["D:\\Nguli\\SEM 6\\Pemrograman Visual\\Tugas\\Tugas Besar\\CodeSistemAbsensi\\logo_adw.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="8" width="372" height="28" uuid="55204147-cfee-4761-b7bc-857adbcbff92"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPORT JABATAN]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="f19eb1f7-92b2-4927-8d9d-e593116442b8"/>
+			</line>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="30" splitType="Stretch">
+		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="104" y="2" width="100" height="20" uuid="eb1e7cae-411f-4de2-82f4-c5f672a878f2"/>
+				<reportElement x="104" y="9" width="126" height="20" uuid="eb1e7cae-411f-4de2-82f4-c5f672a878f2"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nama Jabatan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="237" y="2" width="100" height="20" uuid="54d87bd6-e06a-4526-803d-df2b0d78e0d9"/>
+				<reportElement x="270" y="9" width="100" height="20" uuid="54d87bd6-e06a-4526-803d-df2b0d78e0d9"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Role Level]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="2" width="125" height="20" uuid="a6aae5c6-cb5c-4b38-ad72-bd4d42c9a24a"/>
+				<reportElement x="404" y="9" width="125" height="20" uuid="a6aae5c6-cb5c-4b38-ad72-bd4d42c9a24a"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nama Departemen]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="2" width="100" height="20" uuid="3c95b378-25c2-4aca-8147-8008531fa01e"/>
+				<reportElement x="0" y="9" width="100" height="20" uuid="3c95b378-25c2-4aca-8147-8008531fa01e"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[No]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="24" width="555" height="1" uuid="25937374-7084-4abe-bc8f-2da639642653"/>
+				<reportElement x="0" y="31" width="555" height="1" uuid="25937374-7084-4abe-bc8f-2da639642653"/>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="382153d1-afce-49c7-b85a-2f0a5d8bd3ca"/>
 			</line>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="104" y="2" width="100" height="20" uuid="3f4ada5f-e8b3-4190-a538-13acd42e90a6"/>
+				<reportElement x="104" y="9" width="126" height="20" uuid="3f4ada5f-e8b3-4190-a538-13acd42e90a6"/>
 				<textFieldExpression><![CDATA[$F{nama_jabatan}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="237" y="2" width="100" height="20" uuid="213ac3dd-cd41-4e15-bbfa-975d90e7c844"/>
+				<reportElement x="270" y="9" width="100" height="20" uuid="213ac3dd-cd41-4e15-bbfa-975d90e7c844"/>
 				<textFieldExpression><![CDATA[$F{role_level}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="371" y="2" width="125" height="20" uuid="ff087455-b833-4065-96ad-420b67d182f7"/>
+				<reportElement x="404" y="9" width="125" height="20" uuid="ff087455-b833-4065-96ad-420b67d182f7"/>
 				<textFieldExpression><![CDATA[$F{nama_dept}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="2" width="100" height="20" uuid="7cfbec46-2dbe-4bdb-bd9a-66e7695fc142"/>
+				<reportElement x="0" y="9" width="100" height="20" uuid="7cfbec46-2dbe-4bdb-bd9a-66e7695fc142"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="23" width="555" height="1" uuid="5699d039-26a7-42cf-8e2f-ee4ea208d559"/>
+				<reportElement x="0" y="30" width="555" height="1" uuid="5699d039-26a7-42cf-8e2f-ee4ea208d559"/>
 			</line>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="417" y="3" width="100" height="20" uuid="04b1d58a-6650-4d55-867b-e7edc860975d"/>
+				<text><![CDATA[Jakarta,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="24" width="100" height="33" uuid="775443d6-99b1-49cc-8bb1-504cb87eef6b"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Mengetahui
+HRD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="80" width="100" height="20" uuid="8e7df31f-c3f1-4ab7-a817-cd6c34939699"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Wiwiek Nurlianty]]></text>
+			</staticText>
+			<textField pattern="dd-MM-yyyy">
+				<reportElement x="456" y="3" width="100" height="20" uuid="f5edf271-2f9c-447a-b8e0-d8220c822e28"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch"/>

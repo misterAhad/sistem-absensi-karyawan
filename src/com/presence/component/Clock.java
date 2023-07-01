@@ -17,15 +17,15 @@ public class Clock extends javax.swing.JPanel {
         
         
      //unremark this if app is ready to demo
-//        new Thread() {
-//            public void run() {
-//                while (timeRun == 0) {
-//                    SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
-//                    Date d = new Date();
-//                    lbWaktu.setText(s.format(d));
-//                }
-//            }
-//        }.start();
+        new Thread() {
+            public void run() {
+                while (timeRun == 0) {
+                    SimpleDateFormat s = new SimpleDateFormat("HH:mm:ss");
+                    Date d = new Date();
+                    lbWaktu.setText(s.format(d));
+                }
+            }
+        }.start();
     }
     
     public void setClockColor(Color color){
