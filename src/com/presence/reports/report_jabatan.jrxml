@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="df41f04a-c3fe-44b8-89b2-f778d1580fb8">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="25"/>
-	<property name="ireport.y" value="169"/>
+	<property name="ireport.zoom" value="1.3636363636363635"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
 		<![CDATA[select nama_jabatan, 
 CASE role_level WHEN 1 THEN 'Admin' WHEN 2 THEN 'HRD' WHEN 3 THEN 'Manajer' ELSE 'Karyawan' end as role_level, d.nama_dept
@@ -126,10 +126,6 @@ CASE role_level WHEN 1 THEN 'Admin' WHEN 2 THEN 'HRD' WHEN 3 THEN 'Manajer' ELSE
 	<columnFooter>
 		<band height="106" splitType="Stretch">
 			<staticText>
-				<reportElement x="417" y="3" width="100" height="20" uuid="04b1d58a-6650-4d55-867b-e7edc860975d"/>
-				<text><![CDATA[Jakarta,]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="415" y="24" width="100" height="33" uuid="775443d6-99b1-49cc-8bb1-504cb87eef6b"/>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Mengetahui
@@ -140,9 +136,13 @@ HRD]]></text>
 				<textElement textAlignment="Center"/>
 				<text><![CDATA[Wiwiek Nurlianty]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="403" y="4" width="100" height="20" uuid="238265c6-0e8c-49d8-85ca-e77190855332"/>
+				<text><![CDATA[Jakarta,]]></text>
+			</staticText>
 			<textField pattern="dd-MM-yyyy">
-				<reportElement x="456" y="3" width="100" height="20" uuid="f5edf271-2f9c-447a-b8e0-d8220c822e28"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				<reportElement x="442" y="4" width="100" height="20" uuid="8affae62-c577-4f24-8a4a-9714106aa753"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("EEEE dd MMMM yyyy", new java.util.Locale("id")).format(new Date())]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
