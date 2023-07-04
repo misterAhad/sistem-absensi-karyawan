@@ -43,7 +43,7 @@ CASE role_level WHEN 1 THEN 'Admin' WHEN 2 THEN 'HRD' WHEN 3 THEN 'Manajer' ELSE
 			</staticText>
 			<image>
 				<reportElement x="18" y="31" width="66" height="66" uuid="9fd4e505-7c9d-464e-aaef-97d062204fd9"/>
-				<imageExpression><![CDATA["D:\\Nguli\\SEM 6\\Pemrograman Visual\\Tugas\\Tugas Besar\\CodeSistemAbsensi\\logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

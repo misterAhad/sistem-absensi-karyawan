@@ -82,7 +82,7 @@ inner join users u1 on u1.id = c.penyetuju_id;]]>
 			</staticText>
 			<image>
 				<reportElement x="25" y="8" width="66" height="66" uuid="d1a37951-1f58-4906-9606-9a3a2f1f8a66"/>
-				<imageExpression><![CDATA["D:\\Nguli\\SEM 6\\Pemrograman Visual\\Tugas\\Tugas Besar\\CodeSistemAbsensi\\logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

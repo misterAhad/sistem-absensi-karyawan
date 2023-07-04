@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="cbfbda07-77c1-4e72-9bec-68911411a1f1">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="2.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="202"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select u.nip, u.nama_lengkap,
               CONCAT(CASE MONTH(a.tanggal)
@@ -80,7 +80,7 @@ inner join kelompok_absensi ka on u.kelompok_absensi_id = ka.id;]]>
 			</staticText>
 			<image>
 				<reportElement x="23" y="12" width="66" height="66" uuid="7fd615da-8aa6-402b-9bad-f411f8324149"/>
-				<imageExpression><![CDATA["D:\\Nguli\\SEM 6\\Pemrograman Visual\\Tugas\\Tugas Besar\\CodeSistemAbsensi\\logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["com/presence/assets/logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

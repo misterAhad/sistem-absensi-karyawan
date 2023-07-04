@@ -42,7 +42,7 @@
 			</staticText>
 			<image>
 				<reportElement x="30" y="7" width="66" height="66" uuid="f28e328d-54ce-4575-ba60-31b73fe24d97"/>
-				<imageExpression><![CDATA["C:\\Users\\ADW User AHD\\Downloads\\logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

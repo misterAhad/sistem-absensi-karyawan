@@ -52,7 +52,7 @@ inner join jabatan on jabatan.id = users.jabatan_id;]]>
 			</staticText>
 			<image>
 				<reportElement x="23" y="14" width="66" height="66" uuid="08772029-b901-435c-99d6-fe34a300b3ab"/>
-				<imageExpression><![CDATA["D:\\Nguli\\SEM 6\\Pemrograman Visual\\Tugas\\Tugas Besar\\CodeSistemAbsensi\\logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
