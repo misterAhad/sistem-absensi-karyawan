@@ -80,7 +80,7 @@ inner join kelompok_absensi ka on u.kelompok_absensi_id = ka.id;]]>
 			</staticText>
 			<image>
 				<reportElement x="23" y="12" width="66" height="66" uuid="7fd615da-8aa6-402b-9bad-f411f8324149"/>
-				<imageExpression><![CDATA["com/presence/assets/logo_adw.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo_adw.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
